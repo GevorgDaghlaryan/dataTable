@@ -5,19 +5,29 @@ table, tr, td, th {
 table {
   border-collapse: collapse;
 }
+table> thead {
+  background-color: brown;
+}
 th, td {
   padding: 8px;
 }
-#pagination>li{
+
+#pagination> li {
   display: inline-block; 
   border: 1px solid #000; 
   padding: 10px; 
   margin-top:10px;
   margin-right: 3px;
+  margin-left: 3px;
  }
- #pagination>li:hover,#pagination>li.active{
+ #pagination> li:hover,#pagination> li.active {
   cursor: pointer;
   color: red;
+  background-color: brown;
   border: 1px solid red;
 
+ }
+ .data-table-container> select {
+  margin-top: 10px;
+  margin-left: 3px;
  }
