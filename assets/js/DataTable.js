@@ -1,4 +1,4 @@
-class DataTable {
+  class DataTable {
   constructor(columns = [], data = [], { notesPage }) {
     this.columns = columns;
     this.data = data;
@@ -33,7 +33,9 @@ class DataTable {
       $tr.appendChild($th);
       $th.addEventListener('click', (e) => {
        const field = e.target.dataset.sort;
+
         if (!isreverse) {
+
           if (isNaN(+this.data[0][field])) {
             this.data.sort((a, b) => a[field].localeCompare(b[field]))
           }
@@ -41,10 +43,12 @@ class DataTable {
           this.renderData();
           isreverse = true;
         }
+
         if (isreverse) {
           this.data.reverse();
           this.renderData();
         }
+
       })
     });
     const $trDelete = document.createElement('th');
@@ -53,33 +57,31 @@ class DataTable {
     $tr.appendChild($trDelete);
     this.table.appendChild($thead);
     
-    
   }
-
-  
 
   createTbody() {
     const $tbody = document.createElement('tbody');
     this.table.appendChild($tbody);
   }
   createSearchForm(){
-   
     const $ul = document.querySelector('ul');
     const $input = document.createElement('input');
     const $dataTableContainer = document.querySelector('.data-table-container');
     $dataTableContainer.appendChild( $input);
     $input.addEventListener('input',(e)=>{
-     
       let $value = e.target.value;
+
       if($value == ''){
        this.data = this.originalData;
     }
 
       this.data = this.data.filter((elem)=>{
-        for(let key in elem){
-          if(elem[key].toString().includes($value)){
+        for(let key in elem) {
+
+          if(elem[key].toString().includes($value)) {
            return elem;
           }
+
         }
       })
       this.renderData();
@@ -91,7 +93,6 @@ class DataTable {
   }
 
   renderData() {
-    
     const $dataTableContainer = document.querySelector('.data-table-container');
     const $tbody = this.table.querySelector('tbody');
     $tbody.innerHTML = null;
@@ -109,15 +110,15 @@ class DataTable {
       $tdDelete.className = 'remove';
       $tdDelete.innerHTML = 'REMOVE'
       $tdDelete.addEventListener('click',(e)=>{
-        this.data.filter((elem,index)=>{
-          if(elem.id == e.target.dataset.id ){
+        this.data.filter((elem,index)=> {
+
+          if(elem.id == e.target.dataset.id) {
            this.data.splice(index,1);
            this.renderData();
            this.pagination();
            const $ul = document.querySelector('ul');
            $dataTableContainer.removeChild($ul);
-          }
-          
+          } 
         })
       })
       $tr.appendChild($tdDelete);
@@ -144,8 +145,7 @@ class DataTable {
     };
 
     for (let item of items) {
-
-      item.addEventListener('click', function () {
+      item.addEventListener('click', function() {
         let pageNum = this.innerHTML;
         self.start = (pageNum - 1) * self.notesPage;
         self.end = self.start + self.notesPage;
@@ -154,7 +154,6 @@ class DataTable {
         $dataTableContainer.removeChild($ul);
         self.renderData();
         self.pagination();
-        
       })
     }
   }
