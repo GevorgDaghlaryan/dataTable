@@ -4,6 +4,7 @@ table, tr, td, th {
 }
 table {
   border-collapse: collapse;
+  
 }
 table> thead {
   background-color: brown;
@@ -15,10 +16,12 @@ th, td {
 #pagination> li {
   display: inline-block; 
   border: 1px solid #000; 
+  border-radius: 50px;
   padding: 10px; 
   margin-top:10px;
   margin-right: 3px;
   margin-left: 3px;
+  background-color: rgb(172, 168, 110);;
  }
  #pagination> li:hover,#pagination> li.active {
   cursor: pointer;
@@ -29,5 +32,44 @@ th, td {
  }
  .data-table-container> select {
   margin-top: 10px;
-  margin-left: 3px;
+  margin-left: 20px;
  }
+ .data-table-container{
+  border: 1px solid rgb(235, 222, 51);
+  width: 400px;
+ }
+ #pagination{
+  padding:20px;
+ }
+ input{
+  width: 130px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  transition: width 1s ease-in-out;
+  margin-left: 10px;
+}
+
+input:focus {
+  width: 95%;
+}
+.data-table-container{
+  margin:0 auto;
+}
+.remove{
+  font-size: 15px;
+  margin: 0 auto;
+}
+.remove:hover{
+  cursor: pointer;
+  color: red;
+  background-color: brown;
+  border: 1px solid red;
+
+}

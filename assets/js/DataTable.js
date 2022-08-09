@@ -2,6 +2,7 @@ class DataTable {
   constructor(columns = [], data = [], { notesPage }) {
     this.columns = columns;
     this.data = data;
+    this.originalData = data;
     this.notesPage = notesPage;
     this.start = 0;
     this.end = this.start + this.notesPage;
@@ -13,7 +14,6 @@ class DataTable {
     this.table = $table;
     const $dataTableContainer = document.querySelector('.data-table-container');
     $dataTableContainer.appendChild($table);
-    
     this.createThead();
     this.createTbody();
     this.renderData();
@@ -28,10 +28,11 @@ class DataTable {
     this.columns.forEach((column) => {
       const $th = document.createElement('th');
       let isreverse;
-      $th.innerHTML = column;
+      $th.innerHTML = column.name;
+      $th.setAttribute('data-sort', column.index)
       $tr.appendChild($th);
       $th.addEventListener('click', (e) => {
-        const field = e.target.innerHTML;
+       const field = e.target.dataset.sort;
         if (!isreverse) {
           if (isNaN(+this.data[0][field])) {
             this.data.sort((a, b) => a[field].localeCompare(b[field]))
@@ -46,10 +47,16 @@ class DataTable {
         }
       })
     });
-
+    const $trDelete = document.createElement('th');
+    $trDelete.innerHTML='Delete'
     $thead.appendChild($tr);
+    $tr.appendChild($trDelete);
     this.table.appendChild($thead);
+    
+    
   }
+
+  
 
   createTbody() {
     const $tbody = document.createElement('tbody');
@@ -57,13 +64,17 @@ class DataTable {
   }
   createSearchForm(){
    
-    const $ul = document.createElement('ul');
+    const $ul = document.querySelector('ul');
     const $input = document.createElement('input');
     const $dataTableContainer = document.querySelector('.data-table-container');
     $dataTableContainer.appendChild( $input);
     $input.addEventListener('input',(e)=>{
-      const fullData = this.data
+     
       let $value = e.target.value;
+      if($value == ''){
+       this.data = this.originalData;
+    }
+
       this.data = this.data.filter((elem)=>{
         for(let key in elem){
           if(elem[key].toString().includes($value)){
@@ -72,27 +83,46 @@ class DataTable {
         }
       })
       this.renderData();
-    
-      
-      this.data = fullData;
-      
-     } )
+      this.pagination();
+      const $ul = document.querySelector('ul');
+      $dataTableContainer.removeChild($ul);   
+     })
 
   }
 
   renderData() {
-
+    
+    const $dataTableContainer = document.querySelector('.data-table-container');
     const $tbody = this.table.querySelector('tbody');
     $tbody.innerHTML = null;
     this.data.slice(this.start, this.end).map((item) => {
       const $tr = document.createElement('tr');
+
       for (const key in item) {
         const $td = document.createElement('td');
         $td.innerHTML = item[key];
         $tr.appendChild($td);
       };
-
+      
+      const $tdDelete = document.createElement('td');
+      $tdDelete.setAttribute('data-id', item.id);
+      $tdDelete.className = 'remove';
+      $tdDelete.innerHTML = 'REMOVE'
+      $tdDelete.addEventListener('click',(e)=>{
+        this.data.filter((elem,index)=>{
+          if(elem.id == e.target.dataset.id ){
+           this.data.splice(index,1);
+           this.renderData();
+           this.pagination();
+           const $ul = document.querySelector('ul');
+           $dataTableContainer.removeChild($ul);
+          }
+          
+        })
+      })
+      $tr.appendChild($tdDelete);
       $tbody.appendChild($tr);
+
     });
   }
 
@@ -124,6 +154,7 @@ class DataTable {
         $dataTableContainer.removeChild($ul);
         self.renderData();
         self.pagination();
+        
       })
     }
   }

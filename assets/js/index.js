@@ -1,6 +1,10 @@
 import DataTable from './DataTable.js';
 
-const columns = ['id', 'name', 'age'];
+const columns = [
+  {name: 'ID', index: 'id'},
+  {name: 'NAME', index: 'name'},
+  {name: 'AGE', index: 'age'},
+];
 
 const data = [
   {id: 1, name: 'Albert', age: 50,},
@@ -9,6 +13,7 @@ const data = [
   {id: 4, name: 'Ani', age: 22,},
   {id: 5, name: 'Anna', age: 18,},
   {id: 6, name: 'Karen', age: 23,},
+  {id: 7, name: 'Karen', age: 23,},
   {id: 8, name: 'Arsen', age: 19,},
   {id: 9, name: 'Suren', age: 18,},
   {id: 10, name: 'Artur', age: 19,},
