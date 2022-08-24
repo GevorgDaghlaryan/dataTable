@@ -1,16 +1,21 @@
-table, tr, td, th {
+
+.datatable, .datatable__row, .datatable__cell {
   border: solid 1px #000000;
-  margin: 20px;
+  margin: auto;
+
+
 }
-table {
+.datatable {
   border-collapse: collapse;
+  width:50%;
   
 }
-table> thead {
-  background-color: brown;
+.datatable > thead {
+  background-color: rgb(194, 194, 194);
 }
-th, td {
-  padding: 8px;
+
+.datatable__row, .datatable__cell {
+  padding: 5px;
 }
 
 #pagination> li {
@@ -23,7 +28,7 @@ th, td {
   margin-left: 3px;
   background-color: rgb(172, 168, 110);;
  }
- #pagination> li:hover,#pagination> li.active {
+ #pagination> li:hover  {
   cursor: pointer;
   color: red;
   background-color: brown;
@@ -34,21 +39,27 @@ th, td {
   margin-top: 10px;
   margin-left: 20px;
  }
+ #pagination{
+  margin-left: 40%;
+ }
+
+
+ 
  .data-table-container{
+  position: relative;
   border: 1px solid rgb(235, 222, 51);
-  width: 400px;
+  width:100%;
  }
  #pagination{
   padding:20px;
  }
- input{
+ input.search{
   width: 130px;
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
   background-color: white;
-  
   background-position: 10px 10px; 
   background-repeat: no-repeat;
   padding: 12px 20px 12px 40px;
@@ -56,7 +67,7 @@ th, td {
   margin-left: 10px;
 }
 
-input:focus {
+input.search:focus {
   width: 95%;
 }
 .data-table-container{
@@ -69,7 +80,25 @@ input:focus {
 .remove:hover{
   cursor: pointer;
   color: red;
-  background-color: brown;
-  border: 1px solid red;
 
+
+}
+form> input{
+  margin-left: 5px;
+  width: 100px;
+
+}
+#input-for-delete{
+
+margin:   1% 68%;
+  padding: 8px;
+}
+
+tr.datatable__row:hover{
+background-color: rgb(221, 221, 221);
+  
+}
+.active {
+  background-color: #666;
+  color: white;
 }

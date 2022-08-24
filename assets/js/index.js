@@ -32,18 +32,22 @@ const data = [
 ];
 const options = {
   notesPage: 5,
+  rowClassName: 'row',
+  cellClassName: 'cell',
+  tableClassName: 'table'
+
    
 }
-const dataTable = new DataTable(columns, data, options);
-const $dataTableContainer = document.querySelector('.data-table-container');
-dataTable.createTable();
 
 
 
-// Element.prototype.dataTable = function() {
-  
-// };
+ Element.prototype.DataTable = function(columns, data, options) {
+
+  const dataTable = new DataTable(columns, data, options);
+   dataTable.createTable(this)
+   }
+
+   const $dataTableContainer = document.querySelector('.data-table-container');
+   $dataTableContainer.DataTable(columns, data, options)
 
 
-
-// const $table = document.querySelector('.data-table-container');
